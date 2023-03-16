@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+zoom:
+  oauth2:
+    issuer: https://zoom.us/oauth
+    client-id: {{your_client_id}}
+    client-secret: {{your_client_secret}}
+    account-id: {{your_account_id}}
+    api-url: https://api.zoom.us
