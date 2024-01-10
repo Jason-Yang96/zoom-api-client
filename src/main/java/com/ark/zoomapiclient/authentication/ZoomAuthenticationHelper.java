@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class ZoomAuthenticationHelper {
-
     private long tokenExpiryTime;
 
     @Value("${zoom.oauth2.client-id}")
@@ -27,10 +26,11 @@ public class ZoomAuthenticationHelper {
     @Value("${zoom.oauth2.client-secret}")
     private String zoomClientSecret;
 
-    @Value("${zoom.oauth2.issuer}")
-    private String zoomIssuerUrl;
     @Value("${zoom.oauth2.account-id}")
     private String zoomAccountId;
+
+    @Value("${zoom.oauth2.issuer}")
+    private String zoomIssuerUrl;
 
     @Autowired
     RestTemplate restTemplate;
@@ -43,23 +43,18 @@ public class ZoomAuthenticationHelper {
         }
         return this.authResponse.getAuthToken();
     }
-
-    //determine new token should be retrieved
     private boolean checkIfTokenWillExpire() {
 
         Calendar now = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
         long differenceInMillis = this.tokenExpiryTime - now.getTimeInMillis();
 
-        // Token is already expired
         if (differenceInMillis < 0) {
             return true;
         }
-        //Token has less than 20 minutes to expire
         if (TimeUnit.MILLISECONDS.toMinutes(differenceInMillis) < 20) {
             return true;
         }
-
         return false;
     }
 
@@ -94,5 +89,4 @@ public class ZoomAuthenticationHelper {
         Calendar now = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
         this.tokenExpiryTime = now.getTimeInMillis() + (this.authResponse.getExpiresIn() - 10) * 1000;
     }
-
 }

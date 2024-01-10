@@ -6,15 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class ZoomController {
 
     @Autowired
     private ZoomApiService zoomApiService;
 
-    @GetMapping("/my-meetings")
-    public ResponseEntity<String> getAllMeetings() {
-        return zoomApiService.getAllMeetings();
+    @GetMapping("/participants")
+    public ResponseEntity<String> getAllParticipants() {
+        return zoomApiService.getAllParticipants();
     }
 
     @GetMapping("/service-check")

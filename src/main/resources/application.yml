@@ -1,10 +1,17 @@
 server:
-  port: 8080
+  port: 8081
 
+# 변수처럼 가져다 쓸 수 있도록 해야 함.
 zoom:
   oauth2:
     issuer: https://zoom.us/oauth
-    client-id: {{your_client_id}}
-    client-secret: {{your_client_secret}}
-    account-id: {{your_account_id}}
+    client-id: DHAjW6EMT6m9p8mPZ4qsg
+    client-secret: vGRYH2jNanJHuW5XrAqiKo4aClGfBkbL
+    account-id: q_GKg8RzRe-MA4T-RQqKbw #이건 서버to서버에만 해당됨.
     api-url: https://api.zoom.us
+    # 아래 사항을 지정을 안했는데 어떻게 돌아가지?
+#    authorization-grant-type: authorization_code
+#    token-uri: https://zoom.us/oauth/token
+#    user-info-uri: https://api.zoom.us/v2/users/
+#    redirect-uri: <your-redirect-uri>
+#    scope: report:read:admin, report:master, report_chat:read:admin

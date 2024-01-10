@@ -7,6 +7,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class ZoomApiService {
     @Autowired
@@ -19,28 +21,28 @@ public class ZoomApiService {
     private String zoomApiUrl;
     private static String BEARER_AUTHORIZATION = "Bearer %s";
 
-    private static final String ZOOM_USER_BASE_URL = "%s/v2/users";
+    private static final String ZOOM_USER_BASE_URL_REPORT = "%s/v2/report";
 
 
-    public ResponseEntity<String> getAllMeetings() {
+    public ResponseEntity<String> getAllParticipants() {
         ResponseEntity<String> response = null;
         try {
             HttpHeaders authHeader = createBearerAuthHeader(zoomAuthenticationHelper.getAuthenticationToken());
             HttpEntity<String> entity = new HttpEntity<String>(authHeader);
-            response = restTemplate.exchange(getUserMeetingListUrl(), HttpMethod.GET, entity, String.class);
+            response = restTemplate.exchange(getReportParticipantListUrl(), HttpMethod.GET, entity, String.class);
             return response;
         } catch (Exception e) {
             //sout is used for demo purposes you could use @Slf4j
-            System.out.println(String.format("Unable to get all meetings due to %s. Response code: %d", e.getMessage(), response.getStatusCode()));
+            System.out.println(String.format("%s 때문에 참가 인원을 불러올 수가 없습니다. 응답 코드: %d", e.getMessage(), response.getStatusCode()));
             e.printStackTrace();
         }
         return response;
     }
 
-    public String getUserMeetingListUrl() {
+    public String getReportParticipantListUrl() {
         StringBuilder sb = new StringBuilder(
-                String.format(ZOOM_USER_BASE_URL, zoomApiUrl));
-        sb.append("/me/meetings");
+                String.format(ZOOM_USER_BASE_URL_REPORT, zoomApiUrl));
+        sb.append("/meetings/6378707237/participants");
         return sb.toString();
     }
 
@@ -56,4 +58,6 @@ public class ZoomApiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
     }
+
+
 }
