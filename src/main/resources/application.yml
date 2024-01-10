@@ -9,9 +9,10 @@ zoom:
     client-secret: vGRYH2jNanJHuW5XrAqiKo4aClGfBkbL
     account-id: q_GKg8RzRe-MA4T-RQqKbw #이건 서버to서버에만 해당됨.
     api-url: https://api.zoom.us
+    scope: report:read:admin, report:master, report_chat:read:admin
+    token-uri: https://zoom.us/oauth/token
+    report-info-uri: https://api.zoom.us/v2/report/
+    authorization-grant-type: authorization_code
     # 아래 사항을 지정을 안했는데 어떻게 돌아가지?
-#    authorization-grant-type: authorization_code
-#    token-uri: https://zoom.us/oauth/token
-#    user-info-uri: https://api.zoom.us/v2/users/
+
 #    redirect-uri: <your-redirect-uri>
-#    scope: report:read:admin, report:master, report_chat:read:admin
